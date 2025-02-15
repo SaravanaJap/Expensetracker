@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'myapp/styles.css' %}">
+    <link rel="stylesheet" href=" {% static 'myapp/style.css' %}">
+    <title>Document</title>
+</head> 
+<body>
+    <nav class="shadow-lg"> 
+        <div class="container flex">
+            <div class="container flex items-center justify between  mx-auto ">
+                <a href="{% url 'index' %}" class="flex ml-5 px-10 py-5">
+                    <img class="h-10 mr-3" src="{% static 'myapp/images/wallet.png' %}">
+                    <span class="self-center text-xl font-semibold" >Expense Tracker</span>
+                </a>
+            </div>
+            <div class="ml-auto flex items-center space-x-4 flex-nowrap">
+                <div class="widget-header text-right">
+                    {% if user.id is none %}
+                        <div class="widget-header">
+                            <small class="title text-muted">Welcome guest!</small>
+                            <div> 
+                                <a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'register' %}"> Register</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="widget-header">
+                            <small class="title text-muted">Welcome {{ user.first_name }}!</small>
+                            <div> 
+                                <a href="#">Dashboard</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'logout' %}"> Logout</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                </div>
+            </div>
+
+            </div>
+        </div>
+
+    </nav>
+    {% block body%}
+    {% endblock %}
+</body>
+</html>
